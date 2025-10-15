@@ -3,7 +3,17 @@
 //当fifo中的数据大于1024时，tx_byte_num = 1024字节，其他情况，暂定
 //fifo尺寸：8bit x 1024
 
-module udp_tx(    
+module udp_tx#(
+    //parameter define
+    //开发板MAC地址 00-11-22-33-44-55
+    parameter BOARD_MAC = 48'h00_11_22_33_44_55,
+    //开发板IP地址 192.168.1.123     
+    parameter BOARD_IP  = {8'd192,8'd168,8'd1,8'd123},
+    //目的MAC地址 ff_ff_ff_ff_ff_ff
+    parameter  DES_MAC   = 48'hff_ff_ff_ff_ff_ff,
+    //目的IP地址 192.168.1.102     
+    parameter  DES_IP    = {8'd192,8'd168,8'd1,8'd102}
+)(    
     input                clk        , //时钟信号
     input                rst_n      , //复位信号，低电平有效
     
@@ -26,16 +36,6 @@ module udp_tx(
     output  reg          crc_en     , //CRC开始校验使能
     output  reg          crc_clr      //CRC数据复位信号 
     );
-
-//parameter define
-//开发板MAC地址 00-11-22-33-44-55
-parameter BOARD_MAC = 48'h00_11_22_33_44_55;
-//开发板IP地址 192.168.1.123     
-parameter BOARD_IP  = {8'd192,8'd168,8'd1,8'd123}; 
-//目的MAC地址 ff_ff_ff_ff_ff_ff
-parameter  DES_MAC   = 48'hff_ff_ff_ff_ff_ff;
-//目的IP地址 192.168.1.102     
-parameter  DES_IP    = {8'd192,8'd168,8'd1,8'd102};
 
 localparam  st_idle      = 7'b000_0001; //初始状态，等待开始发送信号
 localparam  st_check_sum = 7'b000_0010; //IP首部校验和
