@@ -1,4 +1,4 @@
-bufffer(
+module bufffer(
     input           clk           ,   //时钟信号
     input           rst_n         ,   //复位信号，低电平有效
     input           wr_clk        ,   //写数据时钟
@@ -12,3 +12,5 @@ bufffer(
     input           rd_en         ,   //读使能信号，接tx_req
     output[15:0]    rd_byte_num       //每帧读出的数据字节数，初步定为1024字节
 );
+
+endmodule
