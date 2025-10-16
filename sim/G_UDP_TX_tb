@@ -1,0 +1,11 @@
+module G_UDP_TX_tb();
+reg         sys_clk;
+reg         sys_rst_n;
+reg         eth_rxc;
+
+
+initial begin
+
+end;
+
+endmodule;
